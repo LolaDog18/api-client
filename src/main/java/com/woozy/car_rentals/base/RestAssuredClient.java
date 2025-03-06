@@ -20,15 +20,16 @@ public abstract class RestAssuredClient {
         return given(requestSpecification).get();
     }
 
-    public static Response executePost(String endpoint, RequestSpecification requestSpecification) {
-        return given(requestSpecification).post(endpoint);
-    }
-
-    public static Response executePut(RequestSpecification requestSpecification) {
+    public static Response executePost(RequestSpecification requestSpecification) {
         return given(requestSpecification).post();
     }
 
+    public static Response executePut(RequestSpecification requestSpecification) {
+        return given(requestSpecification).put();
+    }
+
     public static Response executeDelete(RequestSpecification requestSpecification) {
-        return given(requestSpecification).delete();
+        return given(requestSpecification)
+                .delete();
     }
 }
