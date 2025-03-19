@@ -11,8 +11,10 @@ import com.woozy.car_rentals.response.RestAssuredResponseImpl;
 import com.woozy.car_rentals.utils.UrlUtils;
 import io.restassured.specification.RequestSpecification;
 import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.apache.http.entity.ContentType;
 
+@Log4j2
 @NoArgsConstructor
 public class AuthRestAssuredClientImpl extends BaseRestAssuredClient implements AuthenticationClient {
     private static final String basePath = UrlUtils.getBasePathFor(Source.AUTH);
@@ -25,6 +27,7 @@ public class AuthRestAssuredClientImpl extends BaseRestAssuredClient implements 
 
     @Override
     public ClientResponse authenticateCustomer(AuthenticationRequestDto authenticationCustomerDto) {
+        log.info("Authentication happening...");
         return new RestAssuredResponseImpl(RestAssuredClient.executePost(
                 buildSpec(basePath + "/authenticate", authenticationCustomerDto)));
     }
