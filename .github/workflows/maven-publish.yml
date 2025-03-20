@@ -7,6 +7,16 @@ on:
   pull_request:
     branches:
       - master
+  workflow_dispatch:
+    inputs:
+      run_tests:
+        description: "Run tests before packaging?"
+        required: true
+        default: "false"
+        type: choice
+        options:
+          - "true"
+          - "false"
 
 jobs:
   build:
@@ -26,9 +36,4 @@ jobs:
         cache: 'maven'
 
     - name: Build with Maven
-      run: mvn clean package -DskipTests
-
-    - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+      run: mvn clean package -DskipTests=${{ github.event.inputs.run_tests }}
