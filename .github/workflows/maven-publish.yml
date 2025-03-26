@@ -36,14 +36,7 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
           server-id: github
-          settings-path: ${{ github.workspace }}
-
-      - name: Configure Authentication for GitHub Packages
-        run: |
-          mkdir -p ~/.m2
-          echo "<settings><servers><server><id>github</id><username>${{ github.actor }}</username><password>${{ secrets.GITHUB_TOKEN }}</password></server></servers></settings>" > ~/.m2/settings.xml
+          settings-path: ~/.m2
 
       - name: Build and Deploy
-        run: mvn clean deploy --settings $GITHUB_WORKSPACE/settings.xml -DskipTests
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: mvn clean deploy --settings ~/.m2/settings.xml -DskipTests
