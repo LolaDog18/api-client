@@ -11,7 +11,13 @@
     <repositories>
         <repository>
             <id>github</id>
-            <url>https://github.com/roma0593/shared-artifacts/packages</url>
+            <url>https://maven.pkg.github.com/roma0593/shared-artifacts</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
     </repositories>
 
