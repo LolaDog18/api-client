@@ -27,16 +27,28 @@ jobs:
       packages: write
 
     steps:
-      - name: Make checkout
+      - name: Checkout code
         uses: actions/checkout@v4
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
-          cache: 'maven'
           server-id: github
           settings-path: ${{ github.workspace }}
-
-      - name: Build and Deploy
-        run: mvn clean deploy --settings $GITHUB_WORKSPACE/settings.xml -DskipTests
+      - name: Set up maven settings.xml
+        uses: s4u/maven-settings-action@v3.1.0
+        with:
+          servers: |
+            [
+              {
+                "id": "github",
+                "username": "${{ github.actor }}",
+                "password": "${{ secrets.API_CLIENT_PAT }}"
+              }
+            ]
+      - name: Deploy to GitHub packages
+        run: mvn deploy -DskipTests
+        env:
+          SHARED_ARTF_PAT: ${{ secrets.SHARED_ARTIFACT_SECRET }}
+          API_CLIENT_PAT: ${{ secrets.API_CLIENT_PAT }}
