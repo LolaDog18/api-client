@@ -44,6 +44,11 @@ jobs:
                 "id": "github-api-client",
                 "username": "${{ github.actor }}",
                 "password": "${{ secrets.API_CLIENT_PAT }}"
+              },
+              {
+                "id": "github-shared-artifacts",
+                "username": "${{ github.actor }}",
+                "password": "${{ secrets.SHARED_ARTIFACT_SECRET }}"
               }
             ]
       - name: Deploy to GitHub packages
