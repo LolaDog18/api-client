@@ -34,7 +34,6 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-          server-id: github-api-client
           settings-path: ${{ github.workspace }}
       - name: Set up maven settings.xml
         uses: s4u/maven-settings-action@v3.1.0
@@ -42,7 +41,7 @@ jobs:
           servers: |
             [
               {
-                "id": "github",
+                "id": "github-api-client",
                 "username": "${{ github.actor }}",
                 "password": "${{ secrets.API_CLIENT_PAT }}"
               }
