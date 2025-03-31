@@ -10,20 +10,24 @@
 
     <repositories>
         <repository>
-            <id>github-shared-artifacts</id>
-            <url>https://maven.pkg.github.com/LolaDog18/shared-artifacts</url>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/LolaDog18</url>
+            <layout>default</layout>
             <releases>
                 <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
             </releases>
             <snapshots>
                 <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
             </snapshots>
         </repository>
     </repositories>
 
+
     <distributionManagement>
         <repository>
-            <id>github-api-client</id>
+            <id>github-lolaDog</id>
             <url>https://maven.pkg.github.com/LolaDog18/api-client</url>
         </repository>
     </distributionManagement>

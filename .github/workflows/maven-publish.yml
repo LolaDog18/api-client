@@ -41,18 +41,12 @@ jobs:
           servers: |
             [
               {
-                "id": "github-api-client",
+                "id": "github-lolaDog",
                 "username": "${{ github.actor }}",
-                "password": "${{ secrets.API_CLIENT_PAT }}"
-              },
-              {
-                "id": "github-shared-artifacts",
-                "username": "${{ github.actor }}",
-                "password": "${{ secrets.SHARED_ARTIFACT_SECRET }}"
+                "password": "${{ secrets.GITHUB_TOKEN }}"
               }
             ]
       - name: Deploy to GitHub packages
         run: mvn deploy -DskipTests
         env:
-          SHARED_ARTF_PAT: ${{ secrets.SHARED_ARTIFACT_SECRET }}
-          API_CLIENT_PAT: ${{ secrets.API_CLIENT_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
